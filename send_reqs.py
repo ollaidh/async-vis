@@ -18,20 +18,19 @@ async def send_requests(count: int) -> None:
             async with session.get(url) as response:
                 current_task = asyncio.current_task()
                 assert current_task
-                print(
-                    current_task.get_name(),
-                    i,
-                    url,
-                    response.status,
-                )
+                assert response.status == 200
 
 
-async def main() -> None:
+async def run() -> None:
     tasks = [
         asyncio.create_task(send_requests(10), name=f"request-{i}") for i in range(4)
     ]
     await asyncio.gather(*tasks)
 
 
+def main():
+    asyncio.run(run())
+
+
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
