@@ -21,16 +21,17 @@ async def send_requests(count: int) -> None:
                 assert response.status == 200
 
 
-async def run() -> None:
+async def run(task_count: int, request_count: int) -> None:
     tasks = [
-        asyncio.create_task(send_requests(10), name=f"request-{i}") for i in range(4)
+        asyncio.create_task(send_requests(request_count), name=f"request-{i}")
+        for i in range(task_count)
     ]
     await asyncio.gather(*tasks)
 
 
-def main():
-    asyncio.run(run())
+def main(task_count: int, request_count: int):
+    asyncio.run(run(task_count, request_count))
 
 
 if __name__ == "__main__":
-    main()
+    main(4, 10)
