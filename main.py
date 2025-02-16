@@ -2,7 +2,7 @@ import subprocess
 import sys
 import time
 from contextlib import contextmanager
-from send_reqs import main
+import send_requests
 
 
 @contextmanager
@@ -19,5 +19,5 @@ if __name__ == "__main__":
     args = ["server.py"]
     with run_python(args):
         time.sleep(0.5)
-        main()
+        send_requests.main()
     print("Server is down!")
