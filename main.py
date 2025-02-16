@@ -1,5 +1,4 @@
 import subprocess
-import sys
 import time
 from contextlib import contextmanager
 import send_requests
@@ -7,7 +6,7 @@ import send_requests
 
 @contextmanager
 def run_python(args: list[str]):
-    process = subprocess.Popen([sys.executable, *args], stdout=subprocess.DEVNULL)
+    process = subprocess.Popen(["viztracer", *args], stdout=subprocess.DEVNULL)
     try:
         yield process
     finally:
